@@ -1,0 +1,56 @@
+version: '3.2'
+services:
+  mongo:
+    build:
+      context: ./mongoDB
+    restart: always
+    ports:
+      - '27017:27017'
+    volumes:
+      - ./mongoDB/data:/data/db
+  app:
+    restart: always
+    build:
+      context: ./App
+      dockerfile: Dockerfile
+    ports:
+      - '3000:3000'
+    links:
+      - mongo
+      - redis
+      - elasticsearch
+    depends_on:
+      - mongo
+      - redis
+      - elasticsearch
+  redis:
+    image: redis
+    restart: always
+    ports:
+      - '6379:6379'
+  elasticsearch:
+    build:
+      context: ./elasticsearch
+    ports: 
+      - '9200:9200'
+      - '9300:9300'
+    environment:
+      - xpack.security.enabled=false
+      - discovery.type=single-node
+    volumes:
+      - ./elasticsearch/data/:/usr/share/elasticsearch/data
+  kibana:
+    build:
+      context: ./kibana
+      dockerfile: Dockerfile
+    ports:
+      - '5601:5601'
+    volumes:
+      - type: bind
+        source: ./kibana/config/kibana.yml
+        target: /usr/share/kibana/config/kibana.yml
+        read_only: true
+    links:
+      - elasticsearch
+    depends_on:
+      - elasticsearch
