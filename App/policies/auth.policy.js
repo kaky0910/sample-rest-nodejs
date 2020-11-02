@@ -12,17 +12,17 @@ module.exports = (req, res, next) => {
       if (key === 'Bearer') {
         tokenToVerify = value;
       } else {
-        return res.status(401).json({ msg: 'Format for Authorization: Bearer [token]' });
+        return next({name : 'Authorization Format Error', message: 'Format for Authorization: Bearer [token]', status: 401});
       }
     } else {
-      return res.status(401).json({ msg: 'Format for Authorization: Bearer [token]' });
+      return next({name : 'Authorization Format Error', message: 'Format for Authorization: Bearer [token]', status: 401});
     }
   } else {
-    return res.status(401).json({ msg: 'No Authorization was found' });
+    return next({name : 'No Authorization Error', message: 'There is no authorizaion info.', status: 401});
   }
 
   return authService().verify(tokenToVerify, (err, token) => {
-    if (err) return res.status(401).json({ err });
+    if (err) return next(err);
     req.token = token;
     return next();
   });
