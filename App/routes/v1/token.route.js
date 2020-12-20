@@ -7,7 +7,7 @@ const router = express.Router();
 
 var session = require('express-session');
 
-router.route('/getToken')
+router.route('/')
   .post(async (req, res) => {
 
     let result = await UserSchema.find({id: req.params.id, password: req.body.password});

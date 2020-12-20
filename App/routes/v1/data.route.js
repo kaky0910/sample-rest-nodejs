@@ -10,12 +10,8 @@ router.route('/')
     let result = await SomeDataSchema.find();
     res.send(result)});
 
-router.route('/getDatas')
+router.route('/datas')
   .post((req, res) => {
-    let token = uuid4();
-    // auth check
-    let id = req.body.id;
-    let pwd = req.body.password;
     
   });
 
