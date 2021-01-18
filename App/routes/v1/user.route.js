@@ -51,7 +51,7 @@ const router = express.Router();
  *     parameters:
  *       - name: User information
  *         in: body
- *         description: 가입 ID
+ *         description: 가입 유저정보
  *         required: true
  *         schema:
  *           $ref: '#/definitions/User'
