@@ -49,24 +49,12 @@ const router = express.Router();
  *     summary: register new user information
  *     tags: [User]
  *     parameters:
- *       - name: id
+ *       - name: User information
  *         in: body
  *         description: 가입 ID
  *         required: true
  *         schema:
- *           type: string
- *       - name: password
- *         in: body
- *         description: password
- *         required: true
- *         schema:
- *           type: string
- *       - name: username
- *         in: body
- *         description: 사용자명
- *         required: true
- *         schema:
- *           type: string
+ *           $ref: '#/definitions/User'
  *     responses:
  *       200:
  *         description: user list

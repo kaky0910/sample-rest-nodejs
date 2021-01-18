@@ -7,7 +7,7 @@ services:
     ports:
       - '27017:27017'
     volumes:
-      - ./mongoDB/data:/data/db
+      - mongodata:/data/db
   app:
     restart: always
     build:
@@ -78,3 +78,5 @@ services:
       - elasticsearch
     depends_on:
       - elasticsearch
+volumes:
+  mongodata:
