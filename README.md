@@ -17,6 +17,6 @@ docker-compose up
 API 정보 (App: <https://github.com/kaky0910/sample-rest-nodejs/tree/master/App>)
 
 kibana
-> http://localhost:5601
+> http://{URL}:5601
    
 관련페이지 blog.. (REST-API-study: <https://www.notion.so/Sample-RESTAPI-ELK-stack-15c2a7e037f24683b442e178640ad59b>)
